@@ -22,6 +22,8 @@ import (
 	"sync"
 	"time"
 
+	"github.com/mxschmitt/golang-env-struct"
+
 	"github.com/mxschmitt/fritzbox_exporter/pkg/fritzboxmetrics"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
@@ -309,7 +311,7 @@ func (fc *FritzboxCollector) Collect(ch chan<- prometheus.Metric) {
 }
 
 func printToStdout(settings *Settings) error {
-	root, err := fritzboxmetrics.LoadServices(settings.FritzBoxIP, uint16(settings.FritzBoxPort), settings.FritzBoxUserName, settings.FritzBoxIP)
+	root, err := fritzboxmetrics.LoadServices(settings.FritzBox.IP, uint16(settings.FritzBox.Port), settings.FritzBox.UserName, settings.FritzBox.IP)
 	if err != nil {
 		return errors.Wrap(err, "could not load UPnP service")
 	}
@@ -336,12 +338,14 @@ func printToStdout(settings *Settings) error {
 }
 
 type Settings struct {
-	Stdout           bool
-	ListenAddr       string
-	FritzBoxIP       string
-	FritzBoxPort     int
-	FritzBoxUserName string
-	FritzBoxPassword string
+	Stdout     bool   `env:"STDOUT"`
+	ListenAddr string `env:"LISTEN_ADDR"`
+	FritzBox   struct {
+		IP       string `env:"IP"`
+		Port     int    `env:"PORT"`
+		UserName string `env:"USERNAME"`
+		Password string `env:"PASSWORD"`
+	} `env:"FRITZ_BOX"`
 }
 
 func main() {
@@ -349,25 +353,28 @@ func main() {
 	flag.BoolVar(&settings.Stdout, "stdout", false, "print all available metrics to stdout")
 	flag.StringVar(&settings.ListenAddr, "listen-address", ":9133", "The address to listen on for HTTP requests.")
 
-	flag.StringVar(&settings.FritzBoxIP, "gateway-address", "fritz.box", "The hostname or IP of the FRITZ!Box")
-	flag.IntVar(&settings.FritzBoxPort, "gateway-port", 49000, "The port of the FRITZ!Box UPnP service")
-	flag.StringVar(&settings.FritzBoxUserName, "username", "", "The user for the FRITZ!Box UPnP service")
-	flag.StringVar(&settings.FritzBoxPassword, "password", "", "The password for the FRITZ!Box UPnP service")
-
+	flag.StringVar(&settings.FritzBox.IP, "gateway-address", "fritz.box", "The hostname or IP of the FRITZ!Box")
+	flag.IntVar(&settings.FritzBox.Port, "gateway-port", 49000, "The port of the FRITZ!Box UPnP service")
+	flag.StringVar(&settings.FritzBox.UserName, "username", "", "The user for the FRITZ!Box UPnP service")
+	flag.StringVar(&settings.FritzBox.Password, "password", "", "The password for the FRITZ!Box UPnP service")
 	flag.Parse()
+
+	if err := envstruct.ApplyEnvVars(settings, "FRITZ_BOX_EXPORTER"); err != nil {
+		log.Fatalf("could not apply environment variables: %v", err)
+	}
 
 	if settings.Stdout {
 		if err := printToStdout(settings); err != nil {
-			log.Printf("could not print metrics to stdout: %v", err)
+			log.Fatalf("could not print metrics to stdout: %v", err)
 		}
 		return
 	}
 
 	collector := &FritzboxCollector{
-		Gateway:  settings.FritzBoxIP,
-		Port:     uint16(settings.FritzBoxPort),
-		Username: settings.FritzBoxUserName,
-		Password: settings.FritzBoxPassword,
+		Gateway:  settings.FritzBox.IP,
+		Port:     uint16(settings.FritzBox.Port),
+		Username: settings.FritzBox.UserName,
+		Password: settings.FritzBox.Password,
 	}
 
 	go collector.LoadServices()
