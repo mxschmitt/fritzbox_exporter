@@ -241,6 +241,9 @@ func (a *Action) Call() (Result, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "could not roundtrip digest authentification")
 	}
+	if resp.StatusCode == http.StatusUnauthorized {
+		return nil, errors.New("authorization required")
+	}
 
 	data := new(bytes.Buffer)
 	data.ReadFrom(resp.Body)
