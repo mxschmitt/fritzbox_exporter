@@ -57,6 +57,14 @@ Usage $GOPATH/src/github.com/mxschmitt/fritzbox_exporter/cmd/exporter/exporter:
       print all available metrics to stdout
 ```
 
+### With Docker
+
+```shell
+docker run -d --name fritzbox-exporter -p "9133:9133" mxschmitt/fritzbox_exporter
+```
+
+Then call the metrics endpoint on http://localhost:9133/metrics
+
 ## Exported metrics
 
 These metrics are exported:
