@@ -235,21 +235,30 @@ func (a *Action) Call() (Result, error) {
 	req.Header.Set("Content-Type", textXML)
 	req.Header.Set("SoapAction", action)
 
+	var resp *http.Response
+
 	// Add digest authentification
-	t := dac.NewTransport(a.service.Device.root.Username, a.service.Device.root.Password)
-	resp, err := t.RoundTrip(req)
-	if err != nil {
-		return nil, errors.Wrap(err, "could not roundtrip digest authentification")
+	if username := a.service.Device.root.Username; username != "" {
+		t := dac.NewTransport(username, a.service.Device.root.Password)
+		resp, err = t.RoundTrip(req)
+
+		if err != nil {
+			return nil, errors.Wrap(err, "could not roundtrip digest authentification")
+		}
+	} else {
+		resp, err = http.DefaultClient.Do(req)
 	}
-	if resp.StatusCode == http.StatusUnauthorized {
-		return nil, errors.New("authorization required")
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, &ResponseError{
+			URI:        url,
+			StatusCode: resp.StatusCode,
+		}
 	}
 
-	data := new(bytes.Buffer)
-	data.ReadFrom(resp.Body)
-
-	return a.parseSoapResponse(data)
-
+	return a.parseSoapResponse(resp.Body)
 }
 
 func (a *Action) parseSoapResponse(r io.Reader) (Result, error) {
