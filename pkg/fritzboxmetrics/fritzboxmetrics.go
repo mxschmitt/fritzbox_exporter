@@ -125,17 +125,26 @@ type StateVariable struct {
 // The type of the value is string, uint64 or bool depending of the DataType of the variable.
 type Result map[string]interface{}
 
-// load the whole tree
-func (r *Root) load() error {
-	response, err := http.Get(fmt.Sprintf("%s/igddesc.xml", r.BaseURL))
+func (r *Root) fetchAndDecode(path string) error {
+	uri := fmt.Sprintf("%s/%s", r.BaseURL, path)
+	response, err := http.Get(uri)
 	if err != nil {
-		return errors.Wrap(err, "could not get igddesc.xml")
+		return errors.Wrapf(err, "could not get %s", uri)
 	}
+	defer response.Body.Close()
 
 	dec := xml.NewDecoder(response.Body)
-
 	if err = dec.Decode(r); err != nil {
 		return errors.Wrap(err, "could not decode XML")
+	}
+
+	return nil
+}
+
+// load the whole tree
+func (r *Root) load() error {
+	if err := r.fetchAndDecode("igddesc.xml"); err != nil {
+		return err
 	}
 
 	r.Services = make(map[string]*Service)
@@ -143,14 +152,8 @@ func (r *Root) load() error {
 }
 
 func (r *Root) loadTr64() error {
-	igddesc, err := http.Get(fmt.Sprintf("%s/tr64desc.xml", r.BaseURL))
-	if err != nil {
-		return errors.Wrap(err, "could not fetch tr64desc.xml")
-	}
-
-	dec := xml.NewDecoder(igddesc.Body)
-	if err = dec.Decode(r); err != nil {
-		return errors.Wrap(err, "could not decode XML")
+	if err := r.fetchAndDecode("tr64desc.xml"); err != nil {
+		return err
 	}
 
 	r.Services = make(map[string]*Service)
