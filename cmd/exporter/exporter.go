@@ -266,7 +266,7 @@ func (fc *FritzboxCollector) Collect(ch chan<- prometheus.Metric) {
 			var err error
 			lastResult, err = action.Call()
 			if err != nil {
-				log.Printf("could not call action: %v", err)
+				log.Printf("could not call action %s: %v", action.Name, err)
 				collectErrors.Inc()
 				continue
 			}
@@ -324,7 +324,7 @@ func printToStdout(settings *Settings) error {
 
 			res, err := a.Call()
 			if err != nil {
-				log.Printf("unexpected error: %v", err)
+				log.Printf("unexpected error for action %s: %v", a.Name, err)
 				continue
 			}
 
