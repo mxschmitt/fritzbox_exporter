@@ -237,13 +237,13 @@ func (a *Action) Call() (Result, error) {
 
 	var resp *http.Response
 
-	// Add digest authentification
+	// Add digest authentication
 	if username := a.service.Device.root.Username; username != "" {
 		t := dac.NewTransport(username, a.service.Device.root.Password)
 		resp, err = t.RoundTrip(req)
 
 		if err != nil {
-			return nil, errors.Wrap(err, "could not roundtrip digest authentification")
+			return nil, errors.Wrap(err, "could not roundtrip digest authentication")
 		}
 	} else {
 		resp, err = http.DefaultClient.Do(req)
