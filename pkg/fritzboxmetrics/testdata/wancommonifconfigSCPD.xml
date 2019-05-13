@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scpd xmlns="urn:dslforum-org:service-1-0">
+<specVersion>
+<major>1</major>
+<minor>0</minor>
+</specVersion>
+<actionList>
+<action>
+<name>GetCommonLinkProperties</name>
+<argumentList>
+<argument>
+<name>NewWANAccessType</name>
+<direction>out</direction>
+<relatedStateVariable>WANAccessType</relatedStateVariable>
+</argument>
+<argument>
+<name>NewLayer1UpstreamMaxBitRate</name>
+<direction>out</direction>
+<relatedStateVariable>Layer1UpstreamMaxBitRate</relatedStateVariable>
+</argument>
+<argument>
+<name>NewLayer1DownstreamMaxBitRate</name>
+<direction>out</direction>
+<relatedStateVariable>Layer1DownstreamMaxBitRate</relatedStateVariable>
+</argument>
+<argument>
+<name>NewPhysicalLinkStatus</name>
+<direction>out</direction>
+<relatedStateVariable>PhysicalLinkStatus</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action>
+<name>GetTotalBytesSent</name>
+<argumentList>
+<argument>
+<name>NewTotalBytesSent</name>
+<direction>out</direction>
+<relatedStateVariable>TotalBytesSent</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action>
+<name>GetTotalBytesReceived</name>
+<argumentList>
+<argument>
+<name>NewTotalBytesReceived</name>
+<direction>out</direction>
+<relatedStateVariable>TotalBytesReceived</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action>
+<name>GetTotalPacketsSent</name>
+<argumentList>
+<argument>
+<name>NewTotalPacketsSent</name>
+<direction>out</direction>
+<relatedStateVariable>TotalPacketsSent</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action>
+<name>GetTotalPacketsReceived</name>
+<argumentList>
+<argument>
+<name>NewTotalPacketsReceived</name>
+<direction>out</direction>
+<relatedStateVariable>TotalPacketsReceived</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action>
+<name>X_AVM-DE_SetWANAccessType</name>
+<argumentList>
+<argument>
+<name>NewAccessType</name>
+<direction>in</direction>
+<relatedStateVariable>AccessType</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+<action>
+<name>X_AVM-DE_GetOnlineMonitor</name>
+<argumentList>
+<argument>
+<name>NewSyncGroupIndex</name>
+<direction>in</direction>
+<relatedStateVariable>SyncGroupIndex</relatedStateVariable>
+</argument>
+<argument>
+<name>NewTotalNumberSyncGroups</name>
+<direction>out</direction>
+<relatedStateVariable>TotalNumberSyncGroups</relatedStateVariable>
+</argument>
+<argument>
+<name>NewSyncGroupName</name>
+<direction>out</direction>
+<relatedStateVariable>SyncGroupName</relatedStateVariable>
+</argument>
+<argument>
+<name>NewSyncGroupMode</name>
+<direction>out</direction>
+<relatedStateVariable>SyncGroupMode</relatedStateVariable>
+</argument>
+<argument>
+<name>Newmax_ds</name>
+<direction>out</direction>
+<relatedStateVariable>max_ds</relatedStateVariable>
+</argument>
+<argument>
+<name>Newmax_us</name>
+<direction>out</direction>
+<relatedStateVariable>max_us</relatedStateVariable>
+</argument>
+<argument>
+<name>Newds_current_bps</name>
+<direction>out</direction>
+<relatedStateVariable>ds_current_bps</relatedStateVariable>
+</argument>
+<argument>
+<name>Newmc_current_bps</name>
+<direction>out</direction>
+<relatedStateVariable>mc_current_bps</relatedStateVariable>
+</argument>
+<argument>
+<name>Newus_current_bps</name>
+<direction>out</direction>
+<relatedStateVariable>us_current_bps</relatedStateVariable>
+</argument>
+<argument>
+<name>Newprio_realtime_bps</name>
+<direction>out</direction>
+<relatedStateVariable>prio_realtime_bps</relatedStateVariable>
+</argument>
+<argument>
+<name>Newprio_high_bps</name>
+<direction>out</direction>
+<relatedStateVariable>prio_high_bps</relatedStateVariable>
+</argument>
+<argument>
+<name>Newprio_default_bps</name>
+<direction>out</direction>
+<relatedStateVariable>prio_default_bps</relatedStateVariable>
+</argument>
+<argument>
+<name>Newprio_low_bps</name>
+<direction>out</direction>
+<relatedStateVariable>prio_low_bps</relatedStateVariable>
+</argument>
+</argumentList>
+</action>
+</actionList>
+<serviceStateTable>
+<stateVariable sendEvents="no">
+<name>WANAccessType</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>Layer1UpstreamMaxBitRate</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>Layer1DownstreamMaxBitRate</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>PhysicalLinkStatus</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>TotalBytesSent</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>TotalBytesReceived</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>TotalPacketsSent</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>TotalPacketsReceived</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>AccessType</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>SyncGroupIndex</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>TotalNumberSyncGroups</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>SyncGroupName</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>SyncGroupMode</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>max_ds</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>max_us</name>
+<dataType>ui4</dataType>
+<defaultValue>0</defaultValue>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>ds_current_bps</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>mc_current_bps</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>us_current_bps</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>prio_realtime_bps</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>prio_high_bps</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>prio_default_bps</name>
+<dataType>string</dataType>
+</stateVariable>
+<stateVariable sendEvents="no">
+<name>prio_low_bps</name>
+<dataType>string</dataType>
+</stateVariable>
+</serviceStateTable>
+</scpd>

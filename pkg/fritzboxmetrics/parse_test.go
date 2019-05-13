@@ -129,3 +129,31 @@ func TestParseTr64desc(t *testing.T) {
 	require.Len(devices[1].Devices, 1)
 	assert.Len(devices[1].Devices[0].Services, 4)
 }
+
+func TestAction(t *testing.T) {
+	assert := assert.New(t)
+	require := require.New(t)
+
+	actionsFile := testfile("wancommonifconfigSCPD.xml")
+	defer actionsFile.Close()
+
+	responseFile := testfile("igdupnp/GetCommonLinkPropertiesResponse.xml")
+	defer responseFile.Close()
+
+	service := Service{}
+	err := service.parseActions(actionsFile)
+	require.NoError(err)
+
+	action := service.Actions["GetCommonLinkProperties"]
+	require.NotNil(action)
+
+	result, err := action.parseSoapResponse(responseFile)
+	require.NoError(err)
+	require.NotNil(result)
+
+	assert.Len(result, 4)
+	assert.EqualValues(61226000, result["Layer1DownstreamMaxBitRate"])
+	assert.EqualValues(20356000, result["Layer1UpstreamMaxBitRate"])
+	assert.Equal("Up", result["PhysicalLinkStatus"])
+	assert.Equal("DSL", result["WANAccessType"])
+}
