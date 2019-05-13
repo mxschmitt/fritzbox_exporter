@@ -75,31 +75,31 @@ These metrics are exported:
 fritzbox_exporter_collect_errors 0
 # HELP gateway_wan_bytes_received bytes received on gateway WAN interface
 # TYPE gateway_wan_bytes_received counter
-gateway_wan_bytes_received{gateway="fritz.box"} 5.037749914e+09
+gateway_wan_bytes_received 5.037749914e+09
 # HELP gateway_wan_bytes_sent bytes sent on gateway WAN interface
 # TYPE gateway_wan_bytes_sent counter
-gateway_wan_bytes_sent{gateway="fritz.box"} 2.55707479e+08
+gateway_wan_bytes_sent 2.55707479e+08
 # HELP gateway_wan_connection_status WAN connection status (Connected = 1)
 # TYPE gateway_wan_connection_status gauge
-gateway_wan_connection_status{gateway="fritz.box"} 1
+gateway_wan_connection_status 1
 # HELP gateway_wan_connection_uptime_seconds WAN connection uptime
 # TYPE gateway_wan_connection_uptime_seconds gauge
-gateway_wan_connection_uptime_seconds{gateway="fritz.box"} 65259
+gateway_wan_connection_uptime_seconds 65259
 # HELP gateway_wan_layer1_downstream_max_bitrate Layer1 downstream max bitrate
 # TYPE gateway_wan_layer1_downstream_max_bitrate gauge
-gateway_wan_layer1_downstream_max_bitrate{gateway="fritz.box"} 1.286e+07
+gateway_wan_layer1_downstream_max_bitrate 1.286e+07
 # HELP gateway_wan_layer1_link_status Status of physical link (Up = 1)
 # TYPE gateway_wan_layer1_link_status gauge
-gateway_wan_layer1_link_status{gateway="fritz.box"} 1
+gateway_wan_layer1_link_status 1
 # HELP gateway_wan_layer1_upstream_max_bitrate Layer1 upstream max bitrate
 # TYPE gateway_wan_layer1_upstream_max_bitrate gauge
-gateway_wan_layer1_upstream_max_bitrate{gateway="fritz.box"} 1.148e+06
+gateway_wan_layer1_upstream_max_bitrate 1.148e+06
 # HELP gateway_wan_packets_received packets received on gateway WAN interface
 # TYPE gateway_wan_packets_received counter
-gateway_wan_packets_received{gateway="fritz.box"} 1.346625e+06
+gateway_wan_packets_received 1.346625e+06
 # HELP gateway_wan_packets_sent packets sent on gateway WAN interface
 # TYPE gateway_wan_packets_sent counter
-gateway_wan_packets_sent{gateway="fritz.box"} 3.05051e+06
+gateway_wan_packets_sent 3.05051e+06
 ```
 
 ## Output of -test

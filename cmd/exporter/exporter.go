@@ -54,9 +54,9 @@ var metrics = []*Metric{
 		Action:  "GetTotalPacketsReceived",
 		Result:  "TotalPacketsReceived",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_packets_received",
+			"fritzbox_wan_packets_received",
 			"packets received on gateway WAN interface",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.CounterValue,
@@ -66,9 +66,9 @@ var metrics = []*Metric{
 		Action:  "GetTotalPacketsSent",
 		Result:  "TotalPacketsSent",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_packets_sent",
+			"fritzbox_wan_packets_sent",
 			"packets sent on gateway WAN interface",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.CounterValue,
@@ -78,9 +78,9 @@ var metrics = []*Metric{
 		Action:  "GetAddonInfos",
 		Result:  "TotalBytesReceived",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_bytes_received",
+			"fritzbox_wan_bytes_received",
 			"bytes received on gateway WAN interface",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.CounterValue,
@@ -90,9 +90,9 @@ var metrics = []*Metric{
 		Action:  "GetAddonInfos",
 		Result:  "TotalBytesSent",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_bytes_sent",
+			"fritzbox_wan_bytes_sent",
 			"bytes sent on gateway WAN interface",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.CounterValue,
@@ -102,9 +102,9 @@ var metrics = []*Metric{
 		Action:  "GetAddonInfos",
 		Result:  "ByteSendRate",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_bytes_send_rate",
+			"fritzbox_wan_bytes_send_rate",
 			"byte send rate on gateway WAN interface",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.GaugeValue,
@@ -114,9 +114,9 @@ var metrics = []*Metric{
 		Action:  "GetAddonInfos",
 		Result:  "ByteReceiveRate",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_bytes_receive_rate",
+			"fritzbox_wan_bytes_receive_rate",
 			"byte receive rate on gateway WAN interface",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.GaugeValue,
@@ -126,9 +126,9 @@ var metrics = []*Metric{
 		Action:  "GetCommonLinkProperties",
 		Result:  "Layer1UpstreamMaxBitRate",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_layer1_upstream_max_bitrate",
+			"fritzbox_wan_layer1_upstream_max_bitrate",
 			"Layer1 upstream max bitrate",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.GaugeValue,
@@ -138,9 +138,9 @@ var metrics = []*Metric{
 		Action:  "GetCommonLinkProperties",
 		Result:  "Layer1DownstreamMaxBitRate",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_layer1_downstream_max_bitrate",
+			"fritzbox_wan_layer1_downstream_max_bitrate",
 			"Layer1 downstream max bitrate",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.GaugeValue,
@@ -151,9 +151,9 @@ var metrics = []*Metric{
 		Result:  "PhysicalLinkStatus",
 		OkValue: "Up",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_layer1_link_status",
+			"fritzbox_wan_layer1_link_status",
 			"Status of physical link (Up = 1)",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.GaugeValue,
@@ -164,9 +164,9 @@ var metrics = []*Metric{
 		Result:  "ConnectionStatus",
 		OkValue: "Connected",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_connection_status",
+			"fritzbox_wan_connection_status",
 			"WAN connection status (Connected = 1)",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.GaugeValue,
@@ -176,9 +176,9 @@ var metrics = []*Metric{
 		Action:  "GetStatusInfo",
 		Result:  "Uptime",
 		Desc: prometheus.NewDesc(
-			"gateway_wan_connection_uptime_seconds",
+			"fritzbox_wan_connection_uptime_seconds",
 			"WAN connection uptime",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.GaugeValue,
@@ -188,9 +188,9 @@ var metrics = []*Metric{
 		Action:  "GetTotalAssociations",
 		Result:  "TotalAssociations",
 		Desc: prometheus.NewDesc(
-			"gateway_wlan_current_connections",
+			"fritzbox_wlan_current_connections",
 			"current WLAN connections",
-			[]string{"gateway"},
+			nil,
 			nil,
 		),
 		MetricType: prometheus.GaugeValue,
@@ -305,7 +305,6 @@ func (fc *FritzboxCollector) Collect(ch chan<- prometheus.Metric) {
 			m.Desc,
 			m.MetricType,
 			floatval,
-			fc.Gateway,
 		)
 	}
 }
@@ -349,6 +348,7 @@ type Settings struct {
 }
 
 func main() {
+
 	settings := &Settings{}
 	flag.BoolVar(&settings.Stdout, "stdout", false, "print all available metrics to stdout")
 	flag.StringVar(&settings.ListenAddr, "listen-address", ":9133", "The address to listen on for HTTP requests.")
