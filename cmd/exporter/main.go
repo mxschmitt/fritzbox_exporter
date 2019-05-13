@@ -14,7 +14,7 @@ import (
 )
 
 type Settings struct {
-	Stdout     bool   `env:"STDOUT"`
+	Test       bool   `env:"TEST"`
 	ListenAddr string `env:"LISTEN_ADDR"`
 	FritzBox   struct {
 		IP       string `env:"IP"`
@@ -28,7 +28,7 @@ func main() {
 	log.SetFlags(log.Llongfile)
 
 	settings := &Settings{}
-	flag.BoolVar(&settings.Stdout, "stdout", false, "print all available metrics to stdout")
+	flag.BoolVar(&settings.Test, "test", false, "print all available metrics to stdout")
 	flag.StringVar(&settings.ListenAddr, "listen-address", ":9133", "The address to listen on for HTTP requests.")
 
 	flag.StringVar(&settings.FritzBox.IP, "gateway-address", "fritz.box", "The hostname or IP of the FRITZ!Box")
@@ -41,7 +41,7 @@ func main() {
 		log.Fatalf("could not apply environment variables: %v", err)
 	}
 
-	if settings.Stdout {
+	if settings.Test {
 		if err := printToStdout(settings); err != nil {
 			log.Fatalf("could not print metrics to stdout: %v", err)
 		}
