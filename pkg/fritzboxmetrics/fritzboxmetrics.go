@@ -16,7 +16,6 @@ package fritzboxmetrics
 // limitations under the License.
 
 import (
-	"bytes"
 	"encoding/xml"
 	"fmt"
 	"io"
@@ -172,41 +171,54 @@ func (d *Device) fillServices(r *Root) error {
 			return errors.Wrap(err, "could not get service descriptions")
 		}
 
-		var scpd scpdRoot
+		err = s.parseActions(response.Body)
+		response.Body.Close()
 
-		dec := xml.NewDecoder(response.Body)
-		if err = dec.Decode(&scpd); err != nil {
-			return errors.Wrap(err, "could not decode xml")
-		}
-
-		s.Actions = make(map[string]*Action)
-		for _, a := range scpd.Actions {
-			s.Actions[a.Name] = a
-		}
-		s.StateVariables = scpd.StateVariables
-
-		for _, a := range s.Actions {
-			a.service = s
-			a.ArgumentMap = make(map[string]*Argument)
-
-			for _, arg := range a.Arguments {
-				for _, svar := range s.StateVariables {
-					if arg.RelatedStateVariable == svar.Name {
-						arg.StateVariable = svar
-					}
-				}
-
-				a.ArgumentMap[arg.Name] = arg
-			}
+		if err != nil {
+			return err
 		}
 
 		r.Services[s.ServiceType] = s
 	}
+
+	// Handle sub-devices
 	for _, d2 := range d.Devices {
 		if err := d2.fillServices(r); err != nil {
 			return errors.Wrap(err, "could not fill services")
 		}
 	}
+	return nil
+}
+
+func (s *Service) parseActions(r io.Reader) error {
+	var scpd scpdRoot
+
+	dec := xml.NewDecoder(r)
+	if err := dec.Decode(&scpd); err != nil {
+		return errors.Wrap(err, "could not decode xml")
+	}
+
+	s.Actions = make(map[string]*Action)
+	for _, a := range scpd.Actions {
+		s.Actions[a.Name] = a
+	}
+	s.StateVariables = scpd.StateVariables
+
+	for _, a := range s.Actions {
+		a.service = s
+		a.ArgumentMap = make(map[string]*Argument)
+
+		for _, arg := range a.Arguments {
+			for _, svar := range s.StateVariables {
+				if arg.RelatedStateVariable == svar.Name {
+					arg.StateVariable = svar
+				}
+			}
+
+			a.ArgumentMap[arg.Name] = arg
+		}
+	}
+
 	return nil
 }
 
