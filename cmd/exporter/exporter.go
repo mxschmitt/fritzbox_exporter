@@ -27,6 +27,7 @@ import (
 	"github.com/mxschmitt/fritzbox_exporter/pkg/fritzboxmetrics"
 	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
 const serviceLoadRetryTime = 1 * time.Minute
@@ -382,6 +383,6 @@ func main() {
 	prometheus.MustRegister(collector)
 	prometheus.MustRegister(collectErrors)
 
-	http.Handle("/metrics", prometheus.Handler())
+	http.Handle("/metrics", promhttp.Handler())
 	log.Fatal(http.ListenAndServe(settings.ListenAddr, nil))
 }
