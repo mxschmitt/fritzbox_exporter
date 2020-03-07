@@ -108,9 +108,7 @@ var metrics = []*Metric{
 			[]string{"gateway"},
 			nil,
 		),
-		MetricType: prometheus.GaugeValue,
-	},
-	{
+		MetricType: prometheus.GaugeValue, }, {
 		Service: "urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1",
 		Action:  "GetAddonInfos",
 		Result:  "ByteReceiveRate",
@@ -191,6 +189,42 @@ var metrics = []*Metric{
 		Desc: prometheus.NewDesc(
 			"gateway_wlan_current_connections",
 			"current WLAN connections",
+			[]string{"gateway"},
+			nil,
+		),
+		MetricType: prometheus.GaugeValue,
+	},
+	{
+		Service: "urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1",
+		Action:  "GetAddonInfos",
+		Result:  "DNSServer1",
+		Desc: prometheus.NewDesc(
+			"gateway_dns_server_1",
+			"Primary DNS Server",
+			[]string{"gateway"},
+			nil,
+		),
+		MetricType: prometheus.GaugeValue,
+	},
+	{
+		Service: "urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1",
+		Action:  "GetAddonInfos",
+		Result:  "DNSServer2",
+		Desc: prometheus.NewDesc(
+			"gateway_dns_server_2",
+			"Secondary DNS Server",
+			[]string{"gateway"},
+			nil,
+		),
+		MetricType: prometheus.GaugeValue,
+	},
+	{
+		Service: "urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1",
+		Action:  "GetAddonInfos",
+		Result:  "ByteSendRate",
+		Desc: prometheus.NewDesc(
+			"gateway_wan_bytes_send_rate",
+			"byte send rate on gateway WAN interface",
 			[]string{"gateway"},
 			nil,
 		),
