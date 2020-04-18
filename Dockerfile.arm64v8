@@ -6,8 +6,8 @@ LABEL description="FRITZ!Box Prometheus exporter"
 ADD . /go/src/github.com/mxschmitt/fritzbox_exporter
 
 RUN cd /go/src/github.com/mxschmitt/fritzbox_exporter/cmd/exporter && \
-    go get -v ./... && \
-    CGO_ENABLED=0 COOS=linux GOARCH=arm64 go build -o /exporter
+    go get ./... && \
+    CGO_ENABLED=0 go build -o /exporter
 
 FROM arm64v8/alpine
 
