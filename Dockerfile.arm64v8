@@ -1,4 +1,4 @@
-FROM golang AS build-env
+FROM arm64v8/golang:buster AS build-env
 
 LABEL maintainer="Max Schmitt <max@schmitt.mx>"
 LABEL description="FRITZ!Box Prometheus exporter"
