@@ -2,6 +2,8 @@
 
 This exporter exports some variables from an [AVM Fritzbox](https://avm.de/produkte/fritzbox/) to Prometheus.
 
+### (Looking for additional maintainers!)
+
 [![Docker Build Status](https://img.shields.io/docker/build/mxschmitt/fritzbox_exporter.svg)](https://store.docker.com/community/images/mxschmitt/fritzbox_exporter)
 [![GoDoc](https://godoc.org/github.com/mxschmitt/fritzbox_exporter/pkg/fritzboxmetrics?status.svg)](https://godoc.org/github.com/mxschmitt/fritzbox_exporter/pkg/fritzboxmetrics)
 
