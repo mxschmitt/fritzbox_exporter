@@ -77,7 +77,7 @@ var metrics = []*Metric{
 	{
 		Service: "urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1",
 		Action:  "GetAddonInfos",
-		Result:  "TotalBytesReceived",
+		Result:  "X_AVM_DE_TotalBytesReceived64",
 		Desc: prometheus.NewDesc(
 			"gateway_wan_bytes_received",
 			"bytes received on gateway WAN interface",
@@ -89,7 +89,7 @@ var metrics = []*Metric{
 	{
 		Service: "urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1",
 		Action:  "GetAddonInfos",
-		Result:  "TotalBytesSent",
+		Result:  "X_AVM_DE_TotalBytesSent64",
 		Desc: prometheus.NewDesc(
 			"gateway_wan_bytes_sent",
 			"bytes sent on gateway WAN interface",
