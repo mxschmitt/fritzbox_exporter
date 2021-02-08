@@ -22,10 +22,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/mxschmitt/golang-env-struct"
+	envstruct "github.com/mxschmitt/golang-env-struct"
 
 	"github.com/mxschmitt/fritzbox_exporter/pkg/fritzboxmetrics"
-	"github.com/pkg/errors"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -314,7 +313,7 @@ func (fc *FritzboxCollector) Collect(ch chan<- prometheus.Metric) {
 func printToStdout(settings *Settings) error {
 	root, err := fritzboxmetrics.LoadServices(settings.FritzBox.IP, uint16(settings.FritzBox.Port), settings.FritzBox.UserName, settings.FritzBox.IP)
 	if err != nil {
-		return errors.Wrap(err, "could not load UPnP service")
+		return fmt.Errorf("could not load UPnP service: %w", err)
 	}
 
 	for _, s := range root.Services {

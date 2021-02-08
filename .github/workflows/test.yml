@@ -1,0 +1,26 @@
+name: Test
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.36
+  docker_test:
+    name: Build ${{matrix.dockerfile}}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dockerfile: [Dockerfile]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: docker build -t fritzbox_exporter -f ${{matrix.dockerfile}} .
