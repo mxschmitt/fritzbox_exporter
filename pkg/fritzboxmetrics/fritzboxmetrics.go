@@ -301,7 +301,7 @@ func convertResult(val string, arg *Argument) (interface{}, error) {
   case "X_AVM_DE_TotalBytesSent64", "X_AVM_DE_TotalBytesReceived64":
 		res, err := strconv.ParseUint(val, 10, 64)
 		if err != nil {
-			return nil, errors.Wrap(err, "could nto parse uint")
+			return nil, errors.Wrap(err, "could not parse uint")
 		}
 		return uint64(res), nil
   }
