@@ -5,6 +5,14 @@ on:
   pull_request:
     branches: [ master ]
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.36
   docker_test:
     name: Build ${{matrix.dockerfile}}
     runs-on: ubuntu-latest
