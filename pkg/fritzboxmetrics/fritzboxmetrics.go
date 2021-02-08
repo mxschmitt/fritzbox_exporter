@@ -297,6 +297,15 @@ func (a *Action) parseSoapResponse(r io.Reader) (Result, error) {
 }
 
 func convertResult(val string, arg *Argument) (interface{}, error) {
+  switch arg.StateVariable.Name {
+  case "X_AVM_DE_TotalBytesSent64", "X_AVM_DE_TotalBytesReceived64":
+		res, err := strconv.ParseUint(val, 10, 64)
+		if err != nil {
+			return nil, errors.Wrap(err, "could not parse uint")
+		}
+		return uint64(res), nil
+  }
+
 	switch arg.StateVariable.DataType {
 	case "string":
 		return val, nil
