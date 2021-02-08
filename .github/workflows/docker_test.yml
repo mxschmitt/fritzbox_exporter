@@ -1,0 +1,17 @@
+name: Test Docker
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  docker_test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dockerfile: [Dockerfile]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: go build -t fritzbox_exporter -f ${{matrix.dockerfile}} .
