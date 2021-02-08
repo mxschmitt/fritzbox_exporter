@@ -4,7 +4,7 @@ This exporter exports some variables from an [AVM Fritzbox](https://avm.de/produ
 
 ### (Looking for additional maintainers!)
 
-[![Docker Build Status](https://img.shields.io/docker/automated/mxschmitt/fritzbox_exporter)](https://hub.docker.com/r/mxschmitt/fritzbox_exporter) ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen)
+[![Docker Build Status](https://img.shields.io/docker/automated/mxschmitt/fritzbox_exporter)](https://hub.docker.com/r/mxschmitt/fritzbox_exporter) ![Test Docker](https://github.com/mxschmitt/fritzbox_exporter/workflows/Test%20Docker/badge.svg) ![Contributions](https://img.shields.io/badge/contributions-welcome-brightgreen)
 
 ![FRITZ!Box Prometheus Exporter](./docs/logo.svg)
 
@@ -106,7 +106,7 @@ gateway_wan_packets_sent{gateway="fritz.box"} 3.05051e+06
 ## Output of -test
 
 The exporter prints all available Variables to stdout when called with the -test option.
-These values are determined by parsing all services from http://fritz.box:49000/igddesc.xml 
+These values are determined by parsing all services from http://fritz.box:49000/igddesc.xml
 
     Name: urn:schemas-any-com:service:Any:1
     WANDevice - FRITZ!Box 7490: urn:schemas-upnp-org:service:WANCommonInterfaceConfig:1
@@ -161,7 +161,7 @@ These values are determined by parsing all services from http://fritz.box:49000/
       GetIdleDisconnectTime
         IdleDisconnectTime: 0
       X_AVM_DE_GetExternalIPv6Address
-        ExternalIPv6Address: 
+        ExternalIPv6Address:
         PrefixLength: 0
         ValidLifetime: 0
         PreferedLifetime: 0
@@ -171,14 +171,14 @@ These values are determined by parsing all services from http://fritz.box:49000/
       GetExternalIPAddress
         ExternalIPAddress: 1.1.1.1
       X_AVM_DE_GetIPv6Prefix
-        IPv6Prefix: 
+        IPv6Prefix:
         PrefixLength: 0
         ValidLifetime: 0
         PreferedLifetime: 0
       X_AVM_DE_GetIPv6DNSServer
-        IPv6DNSServer1: 
+        IPv6DNSServer1:
         ValidLifetime1: 2002000000
-        IPv6DNSServer2: 
+        IPv6DNSServer2:
         ValidLifetime2: 199800000
       GetConnectionTypeInfo
         ConnectionType: IP_Routed

@@ -18,6 +18,7 @@ package fritzboxmetrics
 import (
 	"bytes"
 	"encoding/xml"
+	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -25,7 +26,6 @@ import (
 	"strings"
 
 	dac "github.com/123Haynes/go-http-digest-auth-client"
-	"github.com/pkg/errors"
 )
 
 // curl http://fritz.box:49000/igddesc.xml
@@ -38,7 +38,7 @@ import (
 const textXML = `text/xml; charset="utf-8"`
 
 // ErrInvalidSOAPResponse will be thrown if we've got an invalid SOAP response
-var ErrInvalidSOAPResponse = errors.New("invalid SOAP response")
+var    ErrInvalidSOAPResponse = errors.New("invalid SOAP response")
 
 // Root of the UPNP tree
 type Root struct {
