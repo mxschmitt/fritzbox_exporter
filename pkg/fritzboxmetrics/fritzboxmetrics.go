@@ -319,7 +319,7 @@ func convertResult(val string, arg *Argument) (interface{}, error) {
 		// type ui4 can contain values greater than 2^32!
 		res, err := strconv.ParseUint(val, 10, 64)
 		if err != nil {
-			return nil, fmt.Errorf("could nto parse uint: %w", err)
+			return nil, fmt.Errorf("could not parse uint: %w", err)
 		}
 		return uint64(res), nil
 	default:

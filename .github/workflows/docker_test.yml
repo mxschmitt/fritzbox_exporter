@@ -6,6 +6,7 @@ on:
     branches: [ master ]
 jobs:
   docker_test:
+    name: Build ${{matrix.dockerfile}}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -14,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build
-      run: go build -t fritzbox_exporter -f ${{matrix.dockerfile}} .
+      run: docker build -t fritzbox_exporter -f ${{matrix.dockerfile}} .
