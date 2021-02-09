@@ -249,7 +249,6 @@ func (a *Action) Call() (Result, error) {
 	if _, err := data.ReadFrom(resp.Body); err != nil {
 		return nil, fmt.Errorf("could not read body: %w", err)
 	}
-	defer resp.Body.Close()
 
 	return a.parseSoapResponse(data)
 
