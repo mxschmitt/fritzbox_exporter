@@ -66,6 +66,34 @@ docker run -d --name fritzbox-exporter -p "9133:9133" mxschmitt/fritzbox_exporte
 
 Then call the metrics endpoint on http://localhost:9133/metrics
 
+### Configuration
+
+|    CLI-Argument    |               Environment               |       Default         |                 Description                 |
+|--------------------|-----------------------------------------|-----------------------|---------------------------------------------|
+| `-stdout`          | `FRITZ_BOX_EXPORTER_STDOUT`             | `0` (bool)            | Print all available metrics to stdout       |
+| `-listen-address`  | `FRITZ_BOX_EXPORTER_LISTEN_ADDR`        | `:9133` (string)      | The address to listen on for HTTP requests. |
+| `-gateway-address` | `FRITZ_BOX_EXPORTER_FRITZ_BOX_IP`       | `fritz.box` (string)  | The hostname or IP of the FRITZ!Box         |
+| `-gateway-port`    | `FRITZ_BOX_EXPORTER_FRITZ_BOX_PORT`     | `49000` (int)         | The port of the FRITZ!Box UPnP service      |
+| `-username`        | `FRITZ_BOX_EXPORTER_FRITZ_BOX_USERNAME` | `<empty>` (string)           | The port of the FRITZ!Box UPnP service      |
+| `-password`        | `FRITZ_BOX_EXPORTER_FRITZ_BOX_PASSWORD` | `<empty>` (string)           | The password for the FRITZ!Box UPnP service |
+
+### Sytemd Setup
+
+To install and run this exporter as a systemd service, you need to create a user, copy the binary to its home folder and create a systemd unit. A sample service is provided in the docs folder.  In there, configuration is done trough a `.env` so no daemon-reload is necessary after changing the configuration. See above, or in the example `.env` file in the `docs` folder, for the available environment variables and how to use them.
+
+```bash
+# useradd fritzbox_exporter -d /etc/fritzbox_exporter -s /bin/nologin
+# cp exporter /etc/fritzbox_exporter/exporter
+# chown fritzbox_exporter:fritzbox_exporter -R /etc/fritzbox_exporter/
+# sudo -u fritzbox_exporter -s
+$ cd ~
+$ vim .env # See docs/.env
+$ exit
+# vim /etc/systemd/system/fritzbox_exporter.service # See docs/fritzbox_exporter.service
+# systemctl daemon-reload
+# systemctl enable --now fritzbox_exporter.service
+```
+
 ## Exported metrics
 
 These metrics are exported:
