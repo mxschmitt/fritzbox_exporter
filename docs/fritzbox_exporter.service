@@ -1,0 +1,12 @@
+# /etc/systemd/system/fritzbox_exporter.service
+[Unit]
+Description=Fritz!Box prometheus exporter
+
+[Service]
+User=fritzbox_exporter
+EnvironmentFile=/etc/fritzbox_exporter/.env
+ExecStart=/etc/fritzbox_exporter/exporter
+
+[Install]
+WantedBy=multi-user.target
+
