@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile: [Dockerfile, Dockerfile.arm64v8, Dockerfile.arm32v7, Dockerfile.i368]
+        dockerfile: [Dockerfile, Dockerfile.arm64v8, Dockerfile.i368]
     steps:
     - uses: actions/checkout@v2
     - run: bash hooks/pre_build
