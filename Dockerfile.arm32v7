@@ -1,4 +1,13 @@
+FROM alpine AS qemu
+
+# QEMU Download
+ENV QEMU_URL https://github.com/balena-io/qemu/releases/download/v5.2.0%2Bbalena4/qemu-5.2.0.balena4-aarch64.tar.gz
+RUN apk add curl && curl -L -s ${QEMU_URL} | tar zxvf - -C . --strip-components 1
+
 FROM arm32v7/golang:buster AS build-env
+
+# Add QEMU
+COPY --from=qemu qemu-aarch64-static /usr/bin
 
 LABEL maintainer="Max Schmitt <max@schmitt.mx>"
 LABEL description="FRITZ!Box Prometheus exporter"

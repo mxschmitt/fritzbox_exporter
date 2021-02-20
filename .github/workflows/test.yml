@@ -22,5 +22,6 @@ jobs:
         dockerfile: [Dockerfile, Dockerfile.arm64v8, Dockerfile.arm32v7, Dockerfile.i368]
     steps:
     - uses: actions/checkout@v2
+    - run: bash hooks/pre_build
     - name: Build
       run: docker build -t fritzbox_exporter -f ${{matrix.dockerfile}} .
