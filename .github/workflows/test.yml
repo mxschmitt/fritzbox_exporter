@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        dockerfile: [Dockerfile]
+        dockerfile: [Dockerfile, Dockerfile.arm64v8, Dockerfile.arm32v7, Dockerfile.i368]
     steps:
     - uses: actions/checkout@v2
     - name: Build
