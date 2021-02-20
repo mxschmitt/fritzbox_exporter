@@ -1,7 +1,6 @@
 FROM i386/golang:buster AS build-env
 
 LABEL maintainer="Max Schmitt <max@schmitt.mx>"
-LABEL maintainer="Markus Martens <markus.martens@gmx.net>"
 LABEL description="FRITZ!Box Prometheus exporter"
 
 COPY go.mod /go.mod
