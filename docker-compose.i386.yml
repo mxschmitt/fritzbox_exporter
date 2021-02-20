@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  fritzbox_exporter:
+    build:
+      context: .
+      dockerfile: Dockerfile.i368
+    image: mxschmitt/fritzbox_exporter_i368
+    container_name: fritzbox-exporter
+    ports:
+      - '9133:9133'
+
+# docker-compose -f docker-compose.i386.yml
