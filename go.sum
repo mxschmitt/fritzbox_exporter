@@ -2,6 +2,8 @@ cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMT
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/123Haynes/go-http-digest-auth-client v0.3.0 h1:KXsi65zWO1G6G9RLiObP8E+4JAeupGJi3A/lgt1wvBE=
 github.com/123Haynes/go-http-digest-auth-client v0.3.0/go.mod h1:QBTQTKXpTpwXFy0QjvHU3Dkbtnxe/A2ER6EIvnI6mCg=
+github.com/123Haynes/go-http-digest-auth-client v0.3.1-0.20171226204513-4c2ff1556cab h1:FQO+Wk1cfsj8IRyLQXorAfgyWwRnH7hs7/GXPu4xTtE=
+github.com/123Haynes/go-http-digest-auth-client v0.3.1-0.20171226204513-4c2ff1556cab/go.mod h1:QBTQTKXpTpwXFy0QjvHU3Dkbtnxe/A2ER6EIvnI6mCg=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/Knetic/govaluate v3.0.1-0.20171022003610-9aa49832a739+incompatible/go.mod h1:r7JcOSlj0wfOMncg0iLm8Leh48TZaKVeNIfJntJ2wa0=
 github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWXgklEdEo=
