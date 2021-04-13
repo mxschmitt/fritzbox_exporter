@@ -54,8 +54,12 @@ Usage $GOPATH/src/github.com/mxschmitt/fritzbox_exporter/cmd/exporter/exporter:
       The port of the FRITZ!Box UPnP service (default 49000)
   -listen-address string
       The address to listen on for HTTP requests. (default ":9133")
-  -test
+  -password string
+      The password for the FRITZ!Box UPnP service
+  -stdout
       print all available metrics to stdout
+  -username string
+      The user for the FRITZ!Box UPnP service
 ```
 
 ### With Docker
@@ -131,9 +135,9 @@ gateway_wan_packets_received{gateway="fritz.box"} 1.346625e+06
 gateway_wan_packets_sent{gateway="fritz.box"} 3.05051e+06
 ```
 
-## Output of -test
+## Output of -stdout
 
-The exporter prints all available Variables to stdout when called with the -test option.
+The exporter prints all available Variables to stdout when called with the -stdout option.
 These values are determined by parsing all services from http://fritz.box:49000/igddesc.xml
 
     Name: urn:schemas-any-com:service:Any:1
