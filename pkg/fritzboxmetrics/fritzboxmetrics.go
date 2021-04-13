@@ -24,8 +24,13 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 
 	dac "github.com/123Haynes/go-http-digest-auth-client"
+)
+
+const (
+	RFC3339_WITHOUT_TZ = "2006-01-02T15:04:05"
 )
 
 // curl http://fritz.box:49000/igddesc.xml
@@ -321,6 +326,36 @@ func convertResult(val string, arg *Argument) (interface{}, error) {
 			return nil, fmt.Errorf("could not parse uint: %w", err)
 		}
 		return uint64(res), nil
+
+	case "i1", "i2", "i4":
+		// type i4 can contain values greater than 2^32!, 2^64 to be precise. ParseInt returns int64 anyways.
+		res, err := strconv.ParseInt(val, 10, 64)
+		if err != nil {
+			return nil, fmt.Errorf("could not parse int: %w", err)
+		}
+		return int64(res), nil
+
+	case "dateTime":
+		// UPnP uses ISO8601 (non-strict RFC3339) with optional TZ.
+		// try RFC3339 first
+		res, err := time.Parse(time.RFC3339, val)
+		if err == nil {
+			// RFC3339 complaient. Yay.
+			return res, nil
+		}
+		// if RFC3339 fails, try without TZ
+		res, err = time.Parse(RFC3339_WITHOUT_TZ, val)
+			if err != nil {
+				return nil, fmt.Errorf("could not parse dateTime: %w", err)
+			}
+		return res, nil
+
+	case "dateTime.tz":
+		res, err := time.Parse(time.RFC3339, val)
+		if err != nil {
+			return nil, fmt.Errorf("could not parse dateTime.tz: %w", err)
+		}
+		return res, nil
 	default:
 		return nil, fmt.Errorf("unknown datatype: %s", arg.StateVariable.DataType)
 	}
