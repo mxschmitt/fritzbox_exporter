@@ -78,8 +78,8 @@ Then call the metrics endpoint on http://localhost:9133/metrics
 | `-listen-address`  | `FRITZ_BOX_EXPORTER_LISTEN_ADDR`        | `:9133` (string)      | The address to listen on for HTTP requests. |
 | `-gateway-address` | `FRITZ_BOX_EXPORTER_FRITZ_BOX_IP`       | `fritz.box` (string)  | The hostname or IP of the FRITZ!Box         |
 | `-gateway-port`    | `FRITZ_BOX_EXPORTER_FRITZ_BOX_PORT`     | `49000` (int)         | The port of the FRITZ!Box UPnP service      |
-| `-username`        | `FRITZ_BOX_EXPORTER_FRITZ_BOX_USERNAME` | `<empty>` (string)           | The port of the FRITZ!Box UPnP service      |
-| `-password`        | `FRITZ_BOX_EXPORTER_FRITZ_BOX_PASSWORD` | `<empty>` (string)           | The password for the FRITZ!Box UPnP service |
+| `-username`        | `FRITZ_BOX_EXPORTER_FRITZ_BOX_USERNAME` | `<empty>` (string)    | The user to use for FRITZ!Box UPnP service  |
+| `-password`        | `FRITZ_BOX_EXPORTER_FRITZ_BOX_PASSWORD` | `<empty>` (string)    | The password for the FRITZ!Box UPnP service |
 
 ### Sytemd Setup
 
