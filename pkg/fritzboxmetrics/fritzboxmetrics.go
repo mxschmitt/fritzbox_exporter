@@ -321,6 +321,15 @@ func convertResult(val string, arg *Argument) (interface{}, error) {
 			return nil, fmt.Errorf("could not parse uint: %w", err)
 		}
 		return uint64(res), nil
+
+	case "i1", "i2", "i4":
+		// type i4 can contain values greater than 2^32!, 2^64 to be precise. ParseInt returns int64 anyways.
+		res, err := strconv.ParseInt(val, 10, 64)
+		if err != nil {
+			return nil, fmt.Errorf("could not parse int: %w", err)
+		}
+		return int64(res), nil
+
 	default:
 		return nil, fmt.Errorf("unknown datatype: %s", arg.StateVariable.DataType)
 	}
